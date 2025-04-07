@@ -28,13 +28,27 @@ const features = [
 const WhyUsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          if (titleRef.current) {
+            titleRef.current.classList.add('sequence-visible');
+          }
+          
+          if (subtitleRef.current) {
+            setTimeout(() => {
+              subtitleRef.current?.classList.add('sequence-visible');
+            }, 200);
+          }
+          
           if (cardsRef.current) {
-            cardsRef.current.classList.add('staggered-fade-in');
+            setTimeout(() => {
+              cardsRef.current?.classList.add('staggered-fade-in');
+            }, 400);
           }
         }
       },
@@ -56,11 +70,15 @@ const WhyUsSection = () => {
   }, []);
 
   return (
-    <section id="why-us" className="section-padding bg-gray-50" ref={sectionRef}>
+    <section id="why-us" className="section-padding bg-gray-50 relative" ref={sectionRef}>
+      {/* Decorative elements */}
+      <div className="absolute top-10 left-10 w-12 h-12 rounded-full bg-green-light opacity-40 animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-20 h-20 rounded-full bg-primary opacity-20 animate-pulse" style={{ animationDelay: "1s" }}></div>
+      
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Greendhobi</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+        <div className="text-center mb-16 sequence-container">
+          <h2 ref={titleRef} className="text-3xl md:text-4xl font-bold mb-4 sequence-item">Why Choose Greendhobi</h2>
+          <p ref={subtitleRef} className="text-gray-600 max-w-2xl mx-auto sequence-item">
             We combine cutting-edge technology with eco-friendly practices to deliver a laundry service that exceeds your expectations.
           </p>
         </div>
@@ -69,7 +87,7 @@ const WhyUsSection = () => {
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 text-center"
+              className="rotating-border bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
             >
               <div className="mb-5 flex justify-center">{feature.icon}</div>
               <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>

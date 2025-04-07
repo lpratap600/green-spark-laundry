@@ -11,15 +11,21 @@ import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import StickyCTA from '@/components/StickyCTA';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { initRevealAnimations } from '@/utils/animations';
+import { initRevealAnimations, initParallaxEffects, initSequenceAnimations } from '@/utils/animations';
 
 const Index = () => {
   useEffect(() => {
-    // Initialize reveal animations
-    const cleanup = initRevealAnimations();
+    // Initialize all animations
+    const cleanupReveal = initRevealAnimations();
+    const cleanupParallax = initParallaxEffects();
+    const cleanupSequence = initSequenceAnimations();
     
     // Cleanup on component unmount
-    return cleanup;
+    return () => {
+      cleanupReveal();
+      cleanupParallax();
+      cleanupSequence();
+    };
   }, []);
 
   return (
