@@ -5,19 +5,9 @@ import { Button } from './ui/button';
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   
   useEffect(() => {
-    // Add parallax effect to background image
-    const handleScroll = () => {
-      if (imageRef.current) {
-        const scrollPosition = window.scrollY;
-        imageRef.current.style.transform = `translateY(${scrollPosition * 0.15}px)`;
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    
     // Sequence animation for title and subtitle
     const titleElement = document.querySelector('.hero-title');
     const subtitleElement = document.querySelector('.hero-subtitle');
@@ -35,20 +25,34 @@ const HeroSection = () => {
       }, 300);
     }, 300);
     
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    // Video playback control
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.7; // Slow down the video for a more elegant look
+    }
   }, []);
 
   return (
     <section id="home" ref={sectionRef} className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      <div ref={imageRef} className="absolute inset-0 z-0">
-        <div className="w-full h-full bg-gradient-to-r from-white via-white to-green-light opacity-90"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-          alt="Folded clean clothes" 
+      <div className="absolute inset-0 z-0">
+        <div className="w-full h-full bg-gradient-to-r from-white via-white to-green-light opacity-90 z-10"></div>
+        
+        {/* Video Background */}
+        <video 
+          ref={videoRef}
+          autoPlay 
+          muted 
+          loop 
+          playsInline
           className="absolute inset-0 w-full h-full object-cover -z-10"
-        />
+        >
+          <source src="https://res.cloudinary.com/da8hyaxyd/video/upload/v1712496302/laundry-service-background-video_qohuv6.mp4" type="video/mp4" />
+          {/* Fallback image if video fails to load */}
+          <img 
+            src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+            alt="Folded clean clothes" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </video>
       </div>
       
       <div className="container mx-auto px-4 z-10">
