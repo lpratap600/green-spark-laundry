@@ -1,12 +1,40 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from 'react';
+import Header from '@/components/Header';
+import HeroSection from '@/components/HeroSection';
+import WhyUsSection from '@/components/WhyUsSection';
+import ServicesSection from '@/components/ServicesSection';
+import PricingSection from '@/components/PricingSection';
+import PickupSchedulerForm from '@/components/PickupSchedulerForm';
+import WhatsAppPromoBlock from '@/components/WhatsAppPromoBlock';
+import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import StickyCTA from '@/components/StickyCTA';
+import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import { initRevealAnimations } from '@/utils/animations';
 
 const Index = () => {
+  useEffect(() => {
+    // Initialize reveal animations
+    const cleanup = initRevealAnimations();
+    
+    // Cleanup on component unmount
+    return cleanup;
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen overflow-x-hidden">
+      <Header />
+      <HeroSection />
+      <WhyUsSection />
+      <ServicesSection />
+      <PricingSection />
+      <WhatsAppPromoBlock />
+      <TestimonialsCarousel />
+      <PickupSchedulerForm />
+      <Footer />
+      <WhatsAppButton />
+      <StickyCTA />
     </div>
   );
 };
