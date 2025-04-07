@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, MessageCircle, Check, Calendar } from 'lucide-react';
 import { Button } from './ui/button';
@@ -21,7 +20,6 @@ const HeroSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   useEffect(() => {
-    // Sequence animation for title and subtitle
     const titleElement = document.querySelector('.hero-title');
     const subtitleElement = document.querySelector('.hero-subtitle');
     const ctaElement = document.querySelector('.hero-cta');
@@ -38,9 +36,8 @@ const HeroSection = () => {
       }, 300);
     }, 300);
     
-    // Video playback control
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.7; // Slow down the video for a more elegant look
+      videoRef.current.playbackRate = 0.7;
     }
   }, []);
 
@@ -48,7 +45,6 @@ const HeroSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     setTimeout(() => {
       toast({
         title: "Pickup Request Submitted!",
@@ -72,7 +68,6 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0">
         <div className="w-full h-full bg-gradient-to-r from-white via-white to-green-light opacity-90 z-10"></div>
         
-        {/* Video Background */}
         <video 
           ref={videoRef}
           autoPlay 
@@ -82,7 +77,6 @@ const HeroSection = () => {
           className="absolute inset-0 w-full h-full object-cover -z-10"
         >
           <source src="https://res.cloudinary.com/da8hyaxyd/video/upload/v1712496302/clothing-laundry-video_z0fhmn.mp4" type="video/mp4" />
-          {/* Fallback image if video fails to load */}
           <img 
             src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
             alt="Folded clean clothes" 
@@ -100,6 +94,20 @@ const HeroSection = () => {
             <p className="hero-subtitle text-xl md:text-2xl text-gray-600 mb-8 sequence-item">
               Reliable, Eco-Friendly, and Affordable Laundry Solutions — Just for You.
             </p>
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-green-600 mr-2 flex-shrink-0 mt-1" />
+                <p className="text-gray-700">Ready in 24 hours - no more waiting or worrying!</p>
+              </div>
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-green-600 mr-2 flex-shrink-0 mt-1" />
+                <p className="text-gray-700">Premium detergents that extend the life of your clothes</p>
+              </div>
+              <div className="flex items-start">
+                <Check className="w-6 h-6 text-green-600 mr-2 flex-shrink-0 mt-1" />
+                <p className="text-gray-700">Convenient pickup & delivery while you're at work</p>
+              </div>
+            </div>
             <div className="hero-cta flex flex-col sm:flex-row gap-4 sequence-item md:hidden">
               <Button className="btn-primary relative overflow-hidden group">
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary to-green-dark opacity-0 group-hover:opacity-30 transition-opacity duration-300"></span>
@@ -112,7 +120,6 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Quick Schedule Form - Desktop */}
           <div className="hidden md:block">
             <Card className="p-6 shadow-lg rounded-xl bg-white/95 backdrop-blur-sm animate-fade-in">
               <h3 className="text-xl font-semibold mb-4 text-center">Schedule Your Pickup</h3>
@@ -171,22 +178,21 @@ const HeroSection = () => {
                   className="w-full btn-primary" 
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Processing...' : 'Schedule Pickup'}
+                  {isSubmitting ? 'Processing...' : 'Schedule Pickup & Save 20%'}
                 </Button>
                 
                 <div className="text-xs text-gray-500 flex items-start mt-2">
                   <Check className="w-4 h-4 mr-1 flex-shrink-0 text-green-600" />
-                  <span>Get confirmation via WhatsApp</span>
+                  <span>First-time customers get a special discount!</span>
                 </div>
               </form>
             </Card>
           </div>
           
-          {/* Quick Schedule Form - Mobile */}
           <div className="md:hidden">
             <Drawer>
               <DrawerTrigger asChild>
-                <Button className="w-full btn-primary">Schedule Your Pickup</Button>
+                <Button className="w-full btn-primary">Schedule Your Pickup & Save 20%</Button>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="p-6">
@@ -246,12 +252,12 @@ const HeroSection = () => {
                       className="w-full btn-primary" 
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? 'Processing...' : 'Schedule Pickup'}
+                      {isSubmitting ? 'Processing...' : 'Schedule Pickup & Save 20%'}
                     </Button>
                     
                     <div className="text-xs text-gray-500 flex items-start mt-2">
                       <Check className="w-4 h-4 mr-1 flex-shrink-0 text-green-600" />
-                      <span>Get confirmation via WhatsApp</span>
+                      <span>First-time customers get a special discount!</span>
                     </div>
                   </form>
                 </div>
